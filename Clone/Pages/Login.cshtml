@@ -1,4 +1,18 @@
 ﻿@page
 @model MyApp.Namespace.LoginModel
 @{
+    ViewData["Title"] = "Login";
 }
+
+<div class="container text-center">
+    <div class="d-flex align-items-center"style="height: 100%">
+        <div class="card top-50 start-50 translate-middle" style="height: 300px; width: 350px;">
+            <div class="card-body">
+                <form>
+                    <input class="form-control m-2" type="email" placeholder="example@website.com" />
+                    <input class="form-control m-2" type="password" placeholder="password" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,7 +4,19 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container text-center">
+    <div class="col align align-content-center">
+        @foreach (Post post in Model.GetPosts())
+        {
+            <div class="card w-50 start-50 translate-middle-x" style="height: 200px;">
+                <div class="card-header">
+                    <h4>@post.user_id</h4>
+                    <h6 class="text-secondary">- @post.date</h6>
+                </div>
+                <div class="card-body">
+                    @post.content
+                </div>
+            </div>
+        }
+    </div>
 </div>

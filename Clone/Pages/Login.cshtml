@@ -4,13 +4,16 @@
     ViewData["Title"] = "Login";
 }
 
-<div class="container text-center">
-    <div class="d-flex align-items-center"style="height: 100%">
-        <div class="card top-50 start-50 translate-middle" style="height: 300px; width: 350px;">
+<div class="container text-center vh-100">
+    <div class="align-self-center vh-100">
+        <div class="card start-50 translate-middle" style="height: 240px; width: 380px; translate: 0vh 40vh;">
             <div class="card-body">
-                <form>
-                    <input class="form-control m-2" type="email" placeholder="example@website.com" />
-                    <input class="form-control m-2" type="password" placeholder="password" />
+                <h3 class="card-title">Welcome</h3>
+                <form>            
+                    <input class="form-control my-3" type="email" placeholder="example@website.com" id="email-field"/>
+                    <input class="form-control my-3" type="password" placeholder="password" id="password-field"/>
+                    <a asp-area="" asp-page="/Signup" class="btn btn-outline-primary">Sign up</a>
+                    <button class="btn btn-primary" type="submit">Login</button>
                 </form>
             </div>
         </div>

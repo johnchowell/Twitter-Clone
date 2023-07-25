@@ -63,13 +63,13 @@ public class IndexModel : PageModel
             Stack<Post> posts = new Stack<Post>();
             while (rdr.Read())
             {
-                posts.Push(new Post(rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), rdr.GetDateTime(4)));
+                posts.Push(new Post(rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), TimeOnly.Parse(rdr.GetString(4)), DateOnly.Parse(rdr.GetString(5))));
             }
             con.Close();
             
             if (posts.Count == 0)
             {
-                posts.Push(new Post(0, "No Posts", "No Posts", "No Posts", DateTime.Now));
+                posts.Push(new Post(0, "No Posts", "No Posts", "No Posts", TimeOnly.Parse(DateTime.Now.ToString()[12..19]), DateOnly.Parse(DateTime.Now.ToString()[0..10])));
             }
             return posts;
         }

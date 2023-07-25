@@ -9,11 +9,12 @@
         <div class="card start-50 translate-middle" style="height: 240px; width: 380px; translate: 0vh 40vh;">
             <div class="card-body">
                 <h3 class="card-title">Welcome</h3>
-                <form>            
-                    <input class="form-control my-3" type="email" placeholder="example@website.com" id="email-field"/>
-                    <input class="form-control my-3" type="password" placeholder="password" id="password-field"/>
+                <form method="post">            
+                    <input class="form-control my-3" type="email" placeholder="username" id="username-field" name="username-field"/>
+                    <input class="form-control my-3" type="password" placeholder="password" id="password-field" name="password-field"/>
                     <a asp-area="" asp-page="/Signup" class="btn btn-outline-primary">Sign up</a>
-                    <button class="btn btn-primary" type="submit">Login</button>
+                    <button class="btn btn-primary" type="submit" >Login</button>
+                    <p class="text-danger" id="error">@Model.status</p>
                 </form>
             </div>
         </div>

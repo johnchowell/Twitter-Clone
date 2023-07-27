@@ -18,25 +18,7 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        InitiateDatabase();
-    }
-
-    public void InitiateDatabase()
-    {
-        string conString = "Data Source=database.db; version=3";
-        using (SQLiteConnection con = new SQLiteConnection(conString))
-        {
-            con.Open();
-            string sql = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(20), email VARCHAR(20), password VARCHAR(20))";
-            SQLiteCommand cmd = new SQLiteCommand(sql, con);
-            cmd.ExecuteNonQuery();
-
-            sql = "CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(20), content VARCHAR(500), user_id varchar(20), date DATETIME)";
-            cmd = new SQLiteCommand(sql, con);
-            cmd.ExecuteNonQuery();
-
-            con.Close();
-        }
+        
     }
 
     public string GetUser()
@@ -63,13 +45,13 @@ public class IndexModel : PageModel
             Stack<Post> posts = new Stack<Post>();
             while (rdr.Read())
             {
-                posts.Push(new Post(rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), TimeOnly.Parse(rdr.GetString(4)), DateOnly.Parse(rdr.GetString(5))));
+                posts.Push(new Post(rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3),(long) Convert.ToDouble(rdr.GetInt64(4))));
             }
             con.Close();
             
             if (posts.Count == 0)
             {
-                posts.Push(new Post(0, "No Posts", "No Posts", "No Posts", TimeOnly.Parse(DateTime.Now.ToString()[12..19]), DateOnly.Parse(DateTime.Now.ToString()[0..10])));
+                posts.Push(new Post(0, "No Posts", "No Posts", "No Posts", 0));
             }
             return posts;
         }

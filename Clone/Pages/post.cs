@@ -7,20 +7,21 @@ public class Post
     public int id { get; set; }
     public string title { get; set; }
     public string content { get; set; }
-    public string user_id { get; set; }
-    public DateOnly date { get; set; }
-    public TimeOnly time { get; set; }
+    public string username { get; set; }
+    public long time { get; set; }
 
-    public Post(int id, string title, string content, string user_id, TimeOnly time, DateOnly date)
+    public Post(int id, string title, string content, string username, long time)
     {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.user_id = user_id;
-        this.date = date;
+        this.username = username;
         this.time = time;
+    }
+    public void MakePost()
+    {
 
-        string query = "INSERT INTO posts (title, content, user_id) VALUES (@title, @content, @user)";
+        string query = "INSERT INTO posts (title, content, username) VALUES (@title, @content, @user)";
         string conString = "Data Source=database.db; version=3";
 
         using (SQLiteConnection con = new SQLiteConnection(conString))
@@ -29,13 +30,13 @@ public class Post
             SQLiteCommand cmd = new SQLiteCommand(query, con);
             cmd.Parameters.AddWithValue("@title", title);
             cmd.Parameters.AddWithValue("@content", content);
-            cmd.Parameters.AddWithValue("@user", user_id);
+            cmd.Parameters.AddWithValue("@user", username);
             cmd.ExecuteNonQuery();
             con.Close();
         }
     }
 
-    public Post GetPostFromId(int id)
+    public Post? GetPostFromId(int id)
     {
         string conString = "Data Source=database.db; version=3";
         using (SQLiteConnection con = new SQLiteConnection(conString))
@@ -47,12 +48,28 @@ public class Post
             SQLiteDataReader rdr = cmd.ExecuteReader();
             if (rdr.Read())
             {
-                return new Post(rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), TimeOnly.Parse(rdr.GetString(4)), DateOnly.Parse(rdr.GetString(5)));
+                con.Close();
+                return new Post(rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), int.Parse(rdr.GetString(4)));
             }
             else
             {
+                con.Close();
                 return null;
             }
+        }
+    }
+
+
+    public static string GetTimeRelative(long time)
+    {
+        switch (DateTime.Now.Subtract(new DateTime(time)).Days)
+        {
+            case 0:
+                return "Today";
+            case 1:
+                return "Yesterday";
+            default:
+                return DateTime.Now.Subtract(new DateTime(time)).Days + " days ago";
         }
     }
 }

@@ -5,6 +5,25 @@
 
 <div class="container text-center">
     <div class="col-4 align-self-center">
-        <p> This is a Test</p>
+        <div class="col my-3">
+            <form method="post" onsubmit="checkPassword()" name="form">
+                <input class="form-control" type="text" placeholder="Full name" id="name" name="name"/>
+                <input class="form-control" type="text" placeholder="Username" id="username" name="username"/>
+                <input class="form-control" type="password" placeholder="Password" id="password" name="pass1"/>
+                <input class="form-control" type="password" placeholder="Confirm password" id="confirmPassword" name="pass2"/>
+                <button type="submit" class="btn btn-primary">Sign up</button>
+                <p style="color: red;" id="error"></p>
+            </form>
+        </div>
     </div>
 </div>
+
+<script>
+    function checkPasswords()
+    {
+        if(document.forms["form"]["pass1"].value != document.forms["form"]["pass2"].value)
+        {
+            document.getElementById("error").innerHTML = "Passwords do not match";
+        }
+    }
+</script>

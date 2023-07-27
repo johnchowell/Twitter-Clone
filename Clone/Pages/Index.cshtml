@@ -9,10 +9,9 @@
         @foreach (Post post in Model.GetPosts())
         {
             <div class="card w-50 start-50 translate-middle-x" style="height: 200px;">
-                <div class="card-header">
-                    <h4>@post.user_id</h4>
-                    <h6 class="text-secondary">- @post.date</h6>
-                </div>
+                <h6>@post.username</h6>
+                <h6 class="text-secondary">- @Post.GetTimeRelative(post.time)</h6>
+                <br>
                 <div class="card-body">
                     @post.content
                 </div>

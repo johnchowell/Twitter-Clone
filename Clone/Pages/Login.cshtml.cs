@@ -8,9 +8,9 @@ namespace MyApp.Namespace
 {
     public class LoginModel : PageModel
     {
-        public string username;
-        public string password;
-        public string status;
+        public string ?username;
+        public string ?password;
+        public string ?status;
         public void OnGet()
         {
             status = "";
@@ -31,18 +31,20 @@ namespace MyApp.Namespace
                 using (SQLiteConnection con = new SQLiteConnection(conString))
                 {
                     con.Open();
-                    string sql = "SELECT * FROM users WHERE name = @name AND password = @password";
+                    string sql = "SELECT * FROM users WHERE username = @name AND password = @password";
                     SQLiteCommand cmd = new SQLiteCommand(sql, con);
                     cmd.Parameters.AddWithValue("@name", username);
                     cmd.Parameters.AddWithValue("@password", password);
                     SQLiteDataReader rdr = cmd.ExecuteReader();
                     if (rdr.Read())
                     {
+                        con.Close();
                         // Create a cookie
                         return RedirectToPage("/Index");
                     }
                     else
                     {
+                        con.Close();
                         status = "Invalid username or password";
                         return Page();
                     }

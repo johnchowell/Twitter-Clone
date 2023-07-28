@@ -20,6 +20,8 @@ namespace MyApp.Namespace
             username = Request.Form["username-field"];
             password = Request.Form["password-field"];
 
+            
+
             if (string.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
             {
                 status = "Please enter a username and password";
@@ -38,13 +40,11 @@ namespace MyApp.Namespace
                     SQLiteDataReader rdr = cmd.ExecuteReader();
                     if (rdr.Read())
                     {
-                        con.Close();
-                        // Create a cookie
+                        Response.Cookies.Append("username", username);
                         return RedirectToPage("/Index");
                     }
                     else
                     {
-                        con.Close();
                         status = "Invalid username or password";
                         return Page();
                     }

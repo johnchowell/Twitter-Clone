@@ -8,12 +8,11 @@
     <div class="col align align-content-center">
         @foreach (Post post in Model.GetPosts())
         {
-            <div class="card w-50 start-50 translate-middle-x" style="height: 200px;">
-                <h6>@post.username</h6>
-                <h6 class="text-secondary">- @Post.GetTimeRelative(post.time)</h6>
-                <br>
-                <div class="card-body">
-                    @post.content
+            <div class="card w-50 start-50 translate-middle-x border-primary">
+                <h5 class="text-start ms-3 mt-2">@post.title</h5>
+                <h6 class="text-primary text-start ms-3 text-opacity-50">@@@post.username - @Post.GetTimeRelative(post.time)</h6>
+                <div class="card-body text-start">
+                    <p>@post.content</p>
                 </div>
             </div>
         }

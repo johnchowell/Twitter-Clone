@@ -57,4 +57,32 @@ public class SiteUser
             return GetUser(username);
         }
     }
+
+    public Stack<Post> GetPosts()
+    {
+        string query = "SELECT * FROM posts WHERE username = @id";
+        string conString = "Data Source=database.db; version=3";
+        Stack<Post> posts = new Stack<Post>();
+
+        using (SQLiteConnection con = new SQLiteConnection(conString))
+        {
+            con.Open();
+            SQLiteCommand cmd = new SQLiteCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            SQLiteDataReader rdr = cmd.ExecuteReader();
+            while (rdr.Read())
+            {
+                posts.Push(new Post(rdr.GetInt32(0), rdr.GetString(1), rdr.GetString(2), rdr.GetString(3), (long) rdr.GetInt64(4)));
+            }
+        }
+
+        if (posts.Count > 0)
+        {
+            return posts;
+        }
+        else
+        {
+            return new Stack<Post>();
+        }
+    }
 }

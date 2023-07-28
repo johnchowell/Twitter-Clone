@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\dat1g\OneDrive\Projects\Coding\Web\Twitter Clone\Twitter-Clone\Clone
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/dat1g/OneDrive/Projects/Coding/Web/Twitter Clone/Twitter-Clone/Clone/Pages/Account.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/dat1g/OneDrive/Projects/Coding/Web/Twitter Clone/Twitter-Clone/Clone/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

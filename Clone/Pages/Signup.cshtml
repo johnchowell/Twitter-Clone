@@ -4,26 +4,24 @@
 }
 
 <div class="container text-center">
-    <div class="col-4 align-self-center">
-        <div class="col my-3">
-            <form method="post" onsubmit="checkPassword()" name="form">
-                <input class="form-control" type="text" placeholder="Full name" id="name" name="name"/>
-                <input class="form-control" type="text" placeholder="Username" id="username" name="username"/>
-                <input class="form-control" type="password" placeholder="Password" id="password" name="pass1"/>
-                <input class="form-control" type="password" placeholder="Confirm password" id="confirmPassword" name="pass2"/>
+    <div class="row">
+        <div class="col-4">
+            <form method="post" onsubmit="" name="form" autocomplete="off">
+                <input class="form-control my-3" type="text" placeholder="Full name" id="name" name="name"
+                    autocomplete="off" />
+                <input class="form-control my-3" type="text" placeholder="Username" id="username" name="username"
+                    autocomplete="off" />
+                <input class="form-control my-3" type="password" placeholder="Password" id="password" name="pass1"
+                    autocomplete="off" />
+                <input class="form-control my-3" type="password" placeholder="Confirm password" id="confirmPassword"
+                    name="pass2" autocomplete="off" />
                 <button type="submit" class="btn btn-primary">Sign up</button>
                 <p style="color: red;" id="error"></p>
             </form>
         </div>
+        <div class="col-8">
+            <h4>Welcome to [website name]</h4>
+            <p>Here we like to [website mission] where our users can [do website stuff]</p>
+        </div>
     </div>
 </div>
-
-<script>
-    function checkPasswords()
-    {
-        if(document.forms["form"]["pass1"].value != document.forms["form"]["pass2"].value)
-        {
-            document.getElementById("error").innerHTML = "Passwords do not match";
-        }
-    }
-</script>

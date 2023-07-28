@@ -1,0 +1,31 @@
+﻿@page
+@model MyApp.Namespace.AccountModel
+@{
+}
+
+@if (String.IsNullOrEmpty(Model.username))
+{
+    <div class="contianer text-center">
+        <h6>You are not signed in</h6>
+        <br>
+        <button class="btn btn-primary" asp-page="/Login">Sign in</button>
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <h6>Hello, @Model.user.name</h6>
+                <br>
+                <p class="text-secondary">User #@Model.user.id</p>
+            </div>
+            <div class="col-10">
+                @foreach (Post post in @Model.user.GetPosts())
+                {
+                    
+                }
+            </div>
+        </div>
+    </div>
+}

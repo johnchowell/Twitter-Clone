@@ -4,15 +4,17 @@ using System;
 using System.Data.SQLite;
 
 
-namespace MyApp.Namespace
+namespace Clone.Pages
 {
     public class LoginModel : PageModel
     {
         public string ?username;
         public string ?password;
         public string ?status;
+        public bool LoggedIn;
         public void OnGet()
         {
+            LoggedIn = false;
             status = "";
         }
         public IActionResult OnPost()
@@ -40,7 +42,10 @@ namespace MyApp.Namespace
                     SQLiteDataReader rdr = cmd.ExecuteReader();
                     if (rdr.Read())
                     {
-                        Response.Cookies.Append("username", username);
+                        CookieOptions options = new CookieOptions();
+                        options.Expires = DateTime.Now.AddDays(1);
+                        LoggedIn = true;
+                        Response.Cookies.Append("username", username, options);
                         return RedirectToPage("/Index");
                     }
                     else
@@ -51,6 +56,7 @@ namespace MyApp.Namespace
                 }
             }
         }
+        
     }
 
     

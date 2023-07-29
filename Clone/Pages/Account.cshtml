@@ -1,14 +1,14 @@
 ﻿@page
-@model MyApp.Namespace.AccountModel
+@model Clone.Pages.AccountModel
 @{
 }
 
-@if (String.IsNullOrEmpty(Model.username))
+@if (!Model.LoggedIn)
 {
     <div class="contianer text-center">
         <h6>You are not signed in</h6>
         <br>
-        <button class="btn btn-primary" asp-page="/Login">Sign in</button>
+        <a class="btn btn-primary" asp-area="" asp-page="/Login">Sign in</a>
     </div>
 }
 else
@@ -17,13 +17,21 @@ else
         <div class="row">
             <div class="col-2">
                 <h6>Hello, @Model.user.name</h6>
-                <br>
                 <p class="text-secondary">User #@Model.user.id</p>
+                <a asp-page="/Index"><button class="btn btn-outline-secondary" onclick="@Model.SignOut()">Sign Out</button></a>
             </div>
             <div class="col-10">
+                <button class="btn btn-outline-primary">Post</button>
                 @foreach (Post post in @Model.user.GetPosts())
                 {
-                    
+                    <div class="card w-50 start-50 translate-middle-x border-primary">
+                        <h5 class="text-start ms-3 mt-2">@post.title</h5>
+                        <h6 class="text-primary text-start ms-3 text-opacity-50">@@@post.username -
+                            @Post.GetTimeRelative(post.time)</h6>
+                        <div class="card-body text-start">
+                            <p>@post.content</p>
+                        </div>
+                    </div>
                 }
             </div>
         </div>

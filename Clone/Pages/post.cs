@@ -62,14 +62,14 @@ public class Post
 
     public static string GetTimeRelative(long time)
     {
-        switch (DateTime.Now.Subtract(new DateTime(time)).Days)
+        switch (Math.Round((double) (DateTimeOffset.UtcNow.ToUnixTimeSeconds() - time) / 86400))
         {
             case 0:
                 return "Today";
             case 1:
                 return "Yesterday";
             default:
-                return DateTime.Now.Subtract(new DateTime(time)).Days + " days ago";
+                return string.Format("{0} days ago", Math.Round((double) (DateTimeOffset.UtcNow.ToUnixTimeSeconds() - time) / 86400));
         }
     }
 }

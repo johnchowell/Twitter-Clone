@@ -10,6 +10,7 @@ namespace Clone.Pages;
 public class IndexModel : PageModel
 {
     private readonly ILogger<IndexModel> _logger;
+    public bool LoggedIn;
 
     public IndexModel(ILogger<IndexModel> logger)
     {
@@ -18,7 +19,15 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        
+        Request.Cookies.TryGetValue("username", out string ?user);
+        if (user != null)
+        {
+            LoggedIn = true;
+        }
+        else
+        {
+            LoggedIn = false;
+        }
     }
 
     public string GetUser()
